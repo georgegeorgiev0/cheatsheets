@@ -1,0 +1,25 @@
+Helm
+
+Deploy Kube-state-metrics in metrics namespace
+
+helm install kube-state-metrics bitnami/kube-state-metrics -n metrics
+
+List helm in namespace metrics
+
+Helm ls -n metrics
+
+To see chart instructions
+
+helm show chart bitnami/kube-state-metrics
+
+Dump values to values file
+
+helm show values bitnami/kube-state-metrics > values.yaml
+
+Get chart version
+
+helm ls -n metric
+
+To get newer version helm upgrade
+
+kube-state-metrics bitnami/kube-state-metrics —version 0.4.0 -n metrics
