@@ -1,0 +1,64 @@
+Kubernetes cheat sheet
+
+All you need is Docker (or similarly compatible) container or a Virtual Machine environment, and Kubernetes is a single command:
+
+minikube start
+
+To create a yaml file
+
+Kubectl create -f helloworld.yaml
+
+Get deployments
+
+Kubectl get deployment
+
+Show all labels on the pods
+
+Kubectl get pods —show-labels
+
+Get replicas
+Kubectl get rs
+
+Investigating problems
+
+Kubectl describe deployment
+
+Check logs on pod
+
+Kubectl exec -it kubectl logs hello-wold-a2134124124
+
+Minikube addons list
+
+minikube addons enable dashboard
+
+Cluster info
+
+kubectl cluster-info
+
+
+Get all pods in namespace
+
+Kubectl get pods -A
+
+Create namespace
+
+kubectl apply -f  namespace.yaml
+
+Example of namespace:
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: production
+
+Delete namespace
+
+Kubectl delete -f namespace.yaml
+
+Get all namespaces
+
+Kubectl get ns
+
+Get all pods in Kube system
+
+kubectl get pods -n kube-system
