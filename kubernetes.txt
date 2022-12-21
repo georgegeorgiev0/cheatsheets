@@ -6,7 +6,7 @@ minikube start
 
 To create a yaml file
 
-Kubectl create -f helloworld.yaml
+kubectl create -f helloworld.yaml
 
 Get deployments
 
@@ -17,17 +17,17 @@ Show all labels on the pods
 Kubectl get pods —show-labels
 
 Get replicas
-Kubectl get rs
+kubectl get rs
 
 Investigating problems
 
-Kubectl describe deployment
+kubectl describe deployment
 
 Check logs on pod
 
 Kubectl exec -it kubectl logs hello-wold-a2134124124
 
-Minikube addons list
+minikube addons list
 
 minikube addons enable dashboard
 
@@ -38,7 +38,7 @@ kubectl cluster-info
 
 Get all pods in namespace
 
-Kubectl get pods -A
+kubectl get pods -A
 
 Create namespace
 
@@ -53,12 +53,50 @@ metadata:
 
 Delete namespace
 
-Kubectl delete -f namespace.yaml
+kubectl delete -f namespace.yaml
 
 Get all namespaces
 
-Kubectl get ns
+kubectl get ns
 
 Get all pods in Kube system
 
 kubectl get pods -n kube-system
+
+kubectl get ns - lists the namespaces within the cluster in the current context
+
+kubectl -n <namespace> get pods - lists all the pods within the given namespace
+
+kubectl -n <namespace> get pods | grep <service you are looking for> - to find a particular pod
+
+kubectl -n <namespace> get pods --watch - to watch the list of pods in real time.
+
+Viewing a resource in more detail
+
+kubectl -n <namespace> describe pod <pod-id> - provides description for the current pod, including the image ID it is built from, the loaded environment variables, configuration, containers and any K8s events which have taken place with the pod.
+
+kubectl -n <namespace> logs <pod-id> - this will output all of the logs for the given pod into your terminal.
+
+You may want to use --tail=<int> for this to retrieve only a subset of the logs, or if you’re looking specifically for a message, piping the output to grep.
+
+kubectl -n <namespace> logs <pod-id> --previous - If your pod has restarted and you want to see the logs from the previous run.
+
+kubectl -n <namespace> logs <pod-id> -c <container> - If you are only interested in the logs for a particular container within the pod.
+
+kubectl top pod <pod-id> --containers - will show you the metrics for the pod, including it’s containers
+
+Executing commands in a pod
+
+kubectl -n <namespace> exec -it <pod-name> -- <command> - executes a command on the given pod.
+
+kubectl -n <namespace> exec -it <pod-name> -- bash - executes bash on the given pod and passes stdin to the container.
+
+kubectl -n <namespace> exec -it <pod-name> -c <container-name> -- <command> - for multi-container pods.
+
+Port-forwarding to a pod
+
+kubectl -n <namespace> port-forward <pod-name> <port> - tunnels requests from your local machine on a specified port to the given port on the specified pod.
+
+Other cheat sheet
+
+https://kubernetes.io/docs/reference/kubectl/cheatsheet/
