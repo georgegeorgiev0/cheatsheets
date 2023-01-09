@@ -1,0 +1,126 @@
+Install
+
+go install google.golang.org/protobuf/cmd/protoc-gen-go@v1.27
+go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.2
+
+make a proto file example example.proto
+
+Example:
+
+syntax = "proto3";
+
+package logs;
+
+option go_package = "/logs";
+
+message Log{
+  string name = 1;
+  string data = 2;
+}
+
+message LogRequest {
+  Log logEntry = 1;
+
+}
+
+message LogResponse{
+  string result = 1;
+}
+
+service LogService {
+  rpc WriteLog (LogRequest) returns (LogResponse);
+}
+
+Install protobuf
+brew install protobuf
+
+In the same directory of the proto file run command
+protoc --go_out=. --go_opt=paths=source_relative --go-grpc_out=. --go-grpc_opt=paths=source_relative logs.proto
+
+Get grpc in the main project
+
+go get google.golang.org/grpc
+
+Get protobuf in the main project
+
+go get google.golang.org/protobuf
+
+
+Client GRPC
+
+func (app *Config) LogViaGRPC(w http.ResponseWriter, r *http.Request) {
+	var requestPayload RequestPayload
+
+	err := app.readJSON(w, r, &requestPayload)
+	if err != nil {
+		app.errorJSON(w, err)
+		return
+	}
+
+	conn, err := grpc.Dial("logger-service:50001", grpc.WithTransportCredentials(insecure.NewCredentials()), grpc.WithBlock())
+	if err != nil {
+		app.errorJSON(w, err)
+		return
+	}
+	defer conn.Close()
+
+	c := logs.NewLogServiceClient(conn)
+	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
+	defer cancel()
+
+	_, err = c.WriteLog(ctx, &logs.LogRequest{
+		LogEntry: &logs.Log {
+			Name: requestPayload.Log.Name,
+			Data: requestPayload.Log.Data,
+		},
+	})
+	if err != nil {
+		app.errorJSON(w, err)
+		return
+	}
+
+	var payload jsonResponse
+	payload.Error = false
+	payload.Message = "logged"
+
+	app.writeJSON(w, http.StatusAccepted, payload)
+}
+
+Server GRPC
+
+func (l *LogServer) WriteLog(ctx context.Context, req *logs.LogRequest) (*logs.LogResponse, error) {
+	input := req.GetLogEntry()
+
+	// write the log
+	logEntry := data.LogEntry {
+		Name: input.Name,
+		Data: input.Data,
+	}
+
+	err := l.Models.LogEntry.Insert(logEntry)
+	if err != nil {
+		res := &logs.LogResponse{Result: "failed"}
+		return res, err
+	}
+
+	// return response
+	res := &logs.LogResponse{Result: "logged!"}
+	return res, nil
+}
+
+func (app *Config) gRPCListen() {
+	lis, err := net.Listen("tcp", fmt.Sprintf(":%s", gRpcPort))
+	if err != nil {
+		log.Fatalf("Failed to listen for gRPC: %v", err)
+	}
+
+	s := grpc.NewServer()
+
+	logs.RegisterLogServiceServer(s, &LogServer{Models: app.Models})
+
+	log.Printf("gRPC Server started on port %s", gRpcPort)
+
+	if err := s.Serve(lis); err != nil {
+		log.Fatalf("Failed to listen for gRPC: %v", err)
+	}
+}
