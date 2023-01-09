@@ -1,0 +1,115 @@
+ctrl + A move to the beginning line
+ctrl + E Move to end of the line
+ctrl + Left arrow Move left one word
+ctrl + Right arrow Move right one word
+ctrl-shift-C copy to clipboard
+ctrl-shift-V paste from clipboard
+ctr-R search command history
+man - manual pages example:
+man ls 
+apropos "example" - search command for given functionality 
+find -name "poe*" find a file and foldres start name with poe
+ln -s poems.txt writting.txt 
+cat - concatenate or print file contents
+grep -b "the" poems.txt - find "the" in poems with lines 
+
+
+File system
+
+/ root
+home stores user home folders
+root stores root's home folder
+etc configuration files for many tools
+bin stores binaries programs
+lib libraries and shared modules
+dev represents devices on the system
+mnt local remote filesystems and mounted
+media where removable storage is mounted
+proc virtual filesystem represneting processes
+sys virtual filesystem represneting kernel values
+
+File commands
+mkdir - create directory
+cp file file2 - copy file to filename
+mv file file2 - rename file to file2
+rm file - remove file 
+rmdir dir - remove directory
+ln - hard link
+chown - change owners name
+chmod - change 
+
+Change directory
+cd .. - parent directory
+cd . Current directory
+cd ~ User's home directory
+cd - past 
+
+Networking
+nm-connection-editor 
+nmcli d see the device and check there status
+ip addr
+
+User management
+echo 'password' | pwscore -check how strong is password
+chage - change a user expiration period
+chage -d 0 -force user to change its password on next login
+chage -I - number of days of inactivity after password expiration before the account is locked
+chage -m - minimum number of days between password changes set to 0 so user may change password at any time
+chage -W - number of days of warning before a password change is required 
+chage -l - list account aging information 
+/etc/passwd - account name, user id, primary group, home directory default shell
+/etc/shadow - encoded password, account aging information
+/etc/login.defs - starting user id and group ids, paswords encoding type
+/etc/default/useradd - default shell, default home directory location
+
+sudo useradd - creating user 
+sudo passwd bob - sets the new password
+sudo userdel -r bob - deletes user bob
+usermod - with different parameters ca  change primary group, lock account, unlock account, specifies shell
+passwd - can delete password, expires password, lock password, unlock password,
+
+Get Gui for something
+yelp man:crontab 
+
+Search for string
+grep kernel file.txt
+Gathering System information
+uptime - how long the system is running
+free -m - how much memory is free
+whoami - shows who is the user atm
+logname - shows with what user are we logged in 
+groups - will show in which groups the user is
+
+tar - Unarchiving files
+ls -la - list files which are hidden
+tree 
+Handle desktops CentOS7
+sudo yum groupinstall "GNOME Desktop"
+sudo yum groupinstall ""
+sudo yum groupinstal "MATE Desktop"
+
+File structure of linux
+/ - root directory of the entire file system
+/bin - essential command binaries
+/boot - boot loader files including kernels
+/dev -essential device files
+/etc - system configuration files
+/home - users home directories
+/lib - 32 bit system libraries
+/lib64 - 64 bit system libraries
+/media - mount points for removable media
+/mnt - temporarily mounted filesystem
+/opt - optional application software packages
+/proc - virtual filesystem providing process and kernel info as files
+/root - home directory for the root user
+/run - run time configuration data
+/sbin - essential system binaries
+/srv - site specific data served by this system
+/sys - sys contains information about the devices connected to the pc
+/tmp - temporary files
+/usr - read only user data
+/var - variable files whose content is expected
+
+Find files with locate
+locate -c bzip - count how much the locate command find files
+ls  /etc/*.conf - search files in etc for .conf
