@@ -1,0 +1,70 @@
+Install node package manager
+
+npm install
+
+Get attribute
+document.querySelector("img").getAttribute("alt")
+
+Has attribute
+document.querySelector("img").hasAttribute("alt")
+
+Set attribute
+document.querySelector("img").setAttribute("this is an alt")
+
+Remove attribute
+document.querySelector("img").removeAttribute()
+
+Change css property
+document.querySelector(".element").style.color = "rebeccapurple"
+
+Replace inner html
+document.querySelector(".main").innerHTML = "<div></div>"
+
+Create element
+const newArticle = document.createElement("article")
+
+Add class
+newArticle.classList.add("backpack")
+
+Loops
+
+for (let i = 0; i < stuff.length; i++) {
+  let listItem = document.createElement("li");
+  listItem.innerHTML = stuff[i];
+  stuffList.append(listItem);
+}
+
+for (const item of stuff) {
+  let listItem = document.createElement("li");
+  listItem.innerHTML = item;
+  stuffList.append(listItem);
+}
+
+stuff.forEach((item) => {
+  let listItem = document.createElement("li");
+  listItem.innerHTML = item;
+  stuffList.append(listItem);
+});
+
+for (const singleObject in nestedObjects) {
+  let listItem = document.createElement("li");
+  listItem.innerHTML = `Name: ${nestedObjects[singleObject].name}`;
+  stuffList.append(listItem);
+}
+
+// map() through the stuff array to make a new stuffItems array.
+const stuffItems = stuff.map((item) => {
+  let listItem = document.createElement("li");
+  listItem.innerHTML = item;
+  return listItem;
+});
+
+Event listener
+
+ const button = backpackArticle.querySelector(".lid-toggle")
+
+  button.addEventListener("click", (event) => {
+    console.log(event)
+    status.innerText === "open" ? status.innerText = "closed" : status.innerText = "open"
+  })
+

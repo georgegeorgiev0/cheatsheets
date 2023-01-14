@@ -1,0 +1,2 @@
+Check remote origin
+git remote -v
