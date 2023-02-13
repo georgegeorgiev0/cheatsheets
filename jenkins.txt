@@ -1,0 +1,4 @@
+kubectx prod
+kubens platfom or platform-de or sparmed-de
+kubectl -n platform get pods | grep jenkins
+kubectl port-forward spryker-jenkins-568bcdbf7b-569cj 8080

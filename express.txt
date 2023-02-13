@@ -1,0 +1,4 @@
+Create express server
+-npm init
+-npm install express
+

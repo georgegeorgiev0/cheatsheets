@@ -4,9 +4,34 @@ npx create-react-app react-app
 In template variables should be called ${example}
 
 States
+State allows us to manage changing data in an application. It's defined as an object where we define key-value pairs specifying various data we want to track in the application.
+There are mainly two ways of creating a component in React:
+
+- class-based component
+- functional component
+
+You can create a component by using an ES6 class keyword
+
 
 Effects
 
 Reducer
 
 React Router
+
+Render
+
+ReactDOM.render(element, container[, callback])
+
+Call constructor of parent class
+
+super(props)
+
+Create from scratch react project
+npm init
+git init
+npm install --save-dev @babel/core @babel/cli @babel/preset-env @babel/preset-react
+npm install --save-dev webpack webpack-cli webpack-dev-server style-loader css-loader babel-loader
+
+
+

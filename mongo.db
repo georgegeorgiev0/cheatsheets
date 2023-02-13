@@ -1,0 +1,33 @@
+Create a db
+mongod --dbpath ./data
+
+Log in in shell
+mongosh
+
+In shell to use db
+use react-blog-db
+
+In shell create
+db.articles.insertMany([
+...   {
+...     name: "learn-react",
+...     upvotes: 0,
+...     comments: [],
+...   },
+...   {
+...     name: "learn-node",
+...     upvotes: 0,
+...     comments: [],
+...   },
+...   {
+...     name: "mongodb",
+...     upvotes: 0,
+...     comments: [],
+...   },
+... ])
+
+Find all articles
+db.articles.find({}).pretty()
+
+Find particular article
+db.articles.find({name:'learn-react'}).pretty()

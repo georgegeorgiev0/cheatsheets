@@ -1,0 +1,1 @@
+PACT_BROKER_TOKEN="token" pact-broker create-version-tag --broker-base-url "https://pactflow.io/" --pacticipant "spryker" --version "1201a6c6" --tag "uat"

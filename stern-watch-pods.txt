@@ -1,0 +1,7 @@
+Watch pods for Spryker pods release
+
+kubectl -n platform-de get pods -o wide --watch | grep spryker
+
+Check Spryker deploy errors Stern
+
+stern -n platform-de spryker-zed -t --since 5m

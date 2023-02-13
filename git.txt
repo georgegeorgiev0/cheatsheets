@@ -1,2 +1,20 @@
 Check remote origin
 git remote -v
+
+Add and check every change/Partial add
+git add -p
+
+Deal with imideate commit
+git reset --soft HEAD~1
+
+Git log on one line
+git log --oneline
+
+Git log graph
+git log --graph --oneline
+
+Revert and amend git commit
+
+
+Revert last commit on unpushed changed
+git reset HEAD^
