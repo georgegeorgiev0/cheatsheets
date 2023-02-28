@@ -1,0 +1,39 @@
+To generate mocks
+1. Add tools.go on project root
+
+//go:build tools
+// +build tools
+
+package tools
+
+import (
+	_ "github.com/golang/mock/mockgen"
+)
+
+2. Create mockgen.sh in tools/scripts
+
+#!/bin/sh
+
+go run github.com/golang/mock/mockgen -source=./client/slack_client.go -package=client -destination=./client/slack_client_mocks.go
+
+3. Place tag in main.go //go:generate tools/scripts/mockgen.sh
+
+Run all unit tests
+go test ./...
+
+Run all integration tests
+go test --tags=integration ./integration/ -v
+
+To have integration tests
+1. Create folder integration make tests post_message_test.go
+2. Name tests with Tests example TestPostRemindSlackMessage
+3. Tag tests with
+//go:build integration
+// +build integration
+
+Create a build for lambda
+GOOS=linux GOARCH=amd64 go build -o main main.go
+
+Zip build
+zip -r main.zip . -i main
+
