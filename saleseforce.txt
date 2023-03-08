@@ -1,0 +1,7 @@
+To start a project
+-Contact your manager to create a sandbox for you
+-Install nvm https://github.com/nvm-sh/nvm
+-Install node version 16.0.0 - nvm install 16.0.0
+-Use node 16.0.0 - nvm use 16.0.0
+-Clone pwa-kit repository - https://github.com/SalesforceCommerceCloud/pwa-kit
+-Create instance - npx pwa-kit-create-app@latest --preset retail-react-app-demo
